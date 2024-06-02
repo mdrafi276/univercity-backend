@@ -1,42 +1,39 @@
-import { TAcademicDepartment } from "./academicDepartment.interface";
-import { AcademicDepartment } from "./academicDepartment.model";
+import { TAcademicDepartment } from './academicDepartment.interface';
+import { AcademicDepartment } from './academicDepartment.model';
 
-const createAcademicFecultyIntoDB = async (payload: TAcademicDepartment) => {
-
-  const isDepartementExist = await AcademicDepartment.findOne({ name: payload.name })
-
-  if (isDepartementExist) {
-    throw new Error('This department is already exist!');
-  }
+const createAcademicDepartmentIntoDB = async (payload: TAcademicDepartment) => {
   const result = await AcademicDepartment.create(payload);
   return result;
 };
 
 const getAllAcademicDepartmentsFromDB = async () => {
-  const result = await AcademicDepartment.find().populate('academicFaculty').populate('academicDepartment');
+  const result = await AcademicDepartment.find().populate('academicFaculty');
   return result;
 };
 
-const getSingleacAdemicDepartmentFromDB = async (id: string) => {
-  const result = await AcademicDepartment.findById(id);
+const getSingleAcademicDepartmentFromDB = async (id: string) => {
+  const result =
+    await AcademicDepartment.findById(id).populate('academicFaculty');
   return result;
 };
 
-const updateacAdemicDepartmentIntoDB = async (
+const updateAcademicDepartmentIntoDB = async (
   id: string,
   payload: Partial<TAcademicDepartment>,
 ) => {
-
-  const result = await AcademicDepartment.findOneAndUpdate({ _id: id }, payload, {
-    new: true,
-  });
+  const result = await AcademicDepartment.findOneAndUpdate(
+    { _id: id },
+    payload,
+    {
+      new: true,
+    },
+  );
   return result;
 };
 
 export const AcademicDepartmentServices = {
-  createAcademicFecultyIntoDB,
+  createAcademicDepartmentIntoDB,
   getAllAcademicDepartmentsFromDB,
-  getSingleacAdemicDepartmentFromDB,
-  updateacAdemicDepartmentIntoDB
-
+  getSingleAcademicDepartmentFromDB,
+  updateAcademicDepartmentIntoDB,
 };
