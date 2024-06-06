@@ -1,9 +1,9 @@
 import httpStatus from "http-status";
-import AppError from "../../../errors/AppError";
-import { AcademicSemester } from "../../academicSemester/academicSemester.model"
+import AppError from "../../errors/AppError";
+import { AcademicSemester } from "../academicSemester/academicSemester.model"
 import { TSemesterRegistration } from "./semesterRegistation.interface"
 import { SemesterRegistation } from "./semesterRegistation.model";
-import QueryBuilder from "../../../builder/QueryBuilder";
+import QueryBuilder from "../../builder/QueryBuilder";
 import { registrationStatus } from "./semesterRegistration.constents";
 
 const createSemesterRegistrationIntoDB = async (payload: TSemesterRegistration) => {

@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
-import catchAsync from "../../../utils/catchAsync";
-import sendResponse from "../../../utils/sendResponse";
+import catchAsync from "../../utils/catchAsync";
+import sendResponse from "../../utils/sendResponse";
 import { SemesterRegistrationService } from "./semesterRegistation.service";
 
 const createSemesterRegistration = catchAsync(async (req, res) => {
