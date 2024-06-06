@@ -121,7 +121,7 @@ const asingFacultiesIntoDB = async (id: string, payload: Partial<TCourseFaculty>
 
 };
 const removeFacultiesFromDB = async (id: string, payload: Partial<TCourseFaculty>,) => {
-    const result = await CourseFaculty.findByIdAndUpdate(id:,
+    const result = await CourseFaculty.findByIdAndUpdate(id,
         {
             $pull: { faculties: { $in: payload } }
         },
@@ -139,5 +139,5 @@ export const CourseServices = {
     getSingleCoueseFromDB,
     updateServiceIntoDB,
     asingFacultiesIntoDB,
-    removeFacultiesIntoDB,
+    removeFacultiesFromDB,
 }
