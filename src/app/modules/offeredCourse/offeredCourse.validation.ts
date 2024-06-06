@@ -1,11 +1,10 @@
-import { string, z } from "zod";
+import { z } from "zod";
 import { Days } from "./offeredCourse.constents";
 
-const createOfferedCourseValidationSchema = z.ObjectId({
+const createOfferedCourseValidationSchema = z.object({
 
     body: z.object({
         semesterRegistration: z.string(),
-        academicSemester: z.string(),
         academicFAculty: z.string(),
         academicDepartment: z.string(),
         course: z.string(),

@@ -109,7 +109,7 @@ const updateServiceIntoDB = async (id: string, payload: Partial<TCourse>) => {
 
 
 const asingFacultiesIntoDB = async (id: string, payload: Partial<TCourseFaculty>,) => {
-    const result = await CourseFaculty.findByIdAndUpdate(id:,
+    const result = await CourseFaculty.findByIdAndUpdate(id,
         {
             course: id,
             $addToSet: { faculties: { $each: payload } },
