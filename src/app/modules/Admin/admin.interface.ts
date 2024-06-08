@@ -17,7 +17,7 @@ export type TUserName = {
   lastName: string;
 };
 
-export type TFaculty = {
+export type TAdmin = {
   id: string;
   user: Types.ObjectId;
   designation: string;
@@ -31,10 +31,9 @@ export type TFaculty = {
   presentAddress: string;
   permanentAddress: string;
   profileImg?: string;
-  academicDepartment: Types.ObjectId;
   isDeleted: boolean;
 };
 
-export interface FacultyModel extends Model<TFaculty> {
-  isUserExists(id: string): Promise<TFaculty | null>;
+export interface AdminModel extends Model<TAdmin> {
+  isUserExists(id: string): Promise<TAdmin | null>;
 }
