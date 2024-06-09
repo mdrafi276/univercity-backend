@@ -2,26 +2,22 @@ import httpStatus from "http-status";
 import AppError from "../../errors/AppError";
 import { User } from "../user/user.model";
 import { TLoginUser } from "./auth.iinterface";
-import bcrypt from 'bcrypt'
 const loginUser = async (payload: TLoginUser) => {
     // checking if the user is exist!
+    const user = (await User.isUserExistsByCustomId(payload.id));
 
-    const isUserExists = await User.findOne({ id: payload?.id })
-    console.log(isUserExists);
-    if (!isUserExists) {
+    if (!user) {
         throw new AppError(httpStatus.NOT_FOUND, "user not found")
     }
 
     //checking if the user is already deleted
 
-    const isDelete = isUserExists?.isDeleted()
-    console.log(isDelete);
+    const isDelete = user?.isDeleted()
     if (!isDelete) {
         throw new AppError(httpStatus.FORBIDDEN, " This user is deleted")
     }
     // check if the user is blocked
-    const userStatus = isUserExists?.status()
-    console.log(userStatus);
+    const userStatus = user?.status()
     if (!userStatus) {
         throw new AppError(httpStatus?.FORBIDDEN, " This user is blocked")
 
@@ -29,11 +25,10 @@ const loginUser = async (payload: TLoginUser) => {
     }
     //checking if the password is correct 
 
-    const isPasswordMatched = bcrypt.compare(payload.password, isUserExists.password);
-    console.log(isPasswordMatched);
+    if (await !User.isPasswordMatched(payload.password, user.password))
 
-    // Access Granted: Send AccessToken, RefreshToken
-    return {}
+        // Access Granted: Send AccessToken, RefreshToken
+        return {}
 };
 
 export const AuthServices = {
