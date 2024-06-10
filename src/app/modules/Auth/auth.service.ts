@@ -46,7 +46,7 @@ const loginUser = async (payload: TLoginUser) => {
 
 
 
-const changePassword = async (userData: JwtPayload { userId: string, role: string, payload: { oldPassword: string, newPassword: string } }) => {
+const changePassword = async (userData: JwtPayload { userId: string, role: String, payload: { oldPassword: string, newPassword: string } }) => {
 
     // checking if the user is exist!
     const user = (await User.isUserExistsByCustomId(userData.userId));
