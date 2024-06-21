@@ -1,23 +1,30 @@
 /* eslint-disable no-unused-vars */
-import { Model } from "mongoose";
-import { USER_ROLE } from "../Auth/user.constents";
-import { boolean } from "zod";
+import { Model } from 'mongoose';
+import { USER_ROLE } from './user.constant';
 
-export type TUser = {
+export interface TUser {
   id: string;
+  email: string;
   password: string;
   needsPasswordChange: boolean;
   passwordChangedAt?: Date;
-  role: 'admin' | 'student' | 'faculty';
+  role: 'supperAdmin' | 'admin' | 'student' | 'faculty';
   status: 'in-progress' | 'blocked';
   isDeleted: boolean;
-};
+}
 
 export interface UserModel extends Model<TUser> {
-  IsUserExistsByCustomId(id: string): Promise<TUser>;
-  isPasswordMatched(plainTextPassword: string, hashedPassword: string): Promise<boolean>;
-  isJWTIssuedBeforePasswordChange: (passwordChangeTimestamp: Date, jwtIssuedTimestamp: number): boolean;
-
+  //instance methods for checking if the user exist
+  isUserExistsByCustomId(id: string): Promise<TUser>;
+  //instance methods for checking if passwords are matched
+  isPasswordMatched(
+    plainTextPassword: string,
+    hashedPassword: string,
+  ): Promise<boolean>;
+  isJWTIssuedBeforePasswordChanged(
+    passwordChangedTimestamp: Date,
+    jwtIssuedTimestamp: number,
+  ): boolean;
 }
 
 export type TUserRole = keyof typeof USER_ROLE;
