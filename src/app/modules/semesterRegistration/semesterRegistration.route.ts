@@ -25,6 +25,7 @@ router.get(
 
 router.patch(
   '/:id',
+  auth(USER_ROLE.supperAdmin, USER_ROLE.admin),
   validateRequest(
     SemesterRegistrationValidations.upadateSemesterRegistrationValidationSchema,
   ),
