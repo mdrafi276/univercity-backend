@@ -39,6 +39,7 @@ router.get(
 
 router.delete(
   '/:id',
+  auth(USER_ROLE.supperAdmin, USER_ROLE.admin),
   SemesterRegistrationController.deleteSemesterRegistration,
 );
 
