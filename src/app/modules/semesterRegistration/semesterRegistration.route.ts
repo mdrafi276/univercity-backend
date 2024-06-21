@@ -43,6 +43,7 @@ router.delete(
   SemesterRegistrationController.deleteSemesterRegistration,
 );
 
-router.get('/', SemesterRegistrationController.getAllSemesterRegistrations);
+router.get('/',
+  auth(USER_ROLE.supperAdmin, USER_ROLE.admin, USER_ROLE.faculty, USER_ROLE.student), SemesterRegistrationController.getAllSemesterRegistrations);
 
 export const semesterRegistrationRoutes = router;
