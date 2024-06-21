@@ -18,6 +18,8 @@ router.post(
 
 router.get(
   '/:id',
+  auth(USER_ROLE.supperAdmin, USER_ROLE.admin, USER_ROLE.faculty, USER_ROLE.student),
+
   SemesterRegistrationController.getSingleSemesterRegistration,
 );
 
